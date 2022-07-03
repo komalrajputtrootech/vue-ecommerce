@@ -1,10 +1,30 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
+  <HeaderMenu/>
   <router-view/>
 </template>
+
+<script>
+import HeaderMenu from '@/components/HeaderMenu.vue';
+
+export default{
+    name: 'App',
+    components: {
+        HeaderMenu
+    },
+    data(){
+        return {
+            cart: []
+        }
+    },
+    beforeCreate(){
+        this.$store.commit('initializeCart')
+    },
+    mounted(){
+        this.cart = this.$store.state.cart
+    }
+}
+
+</script>
 
 <style>
 #app {
