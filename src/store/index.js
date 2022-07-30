@@ -18,8 +18,18 @@ export default createStore({
      },
      addItemToCart(state, item){
          const exists = state.cart.filter(i => i.id === item.id);
+         console.log(exists)
          if(exists.length == 0){
+             item.quantity = 1
              state.cart.push(item);
+             updateLocalCart(state);
+         }
+         else{
+             for (var i=0; i<state.cart.length; i++) {
+                if (state.cart[i].id == item.id) {
+                   state.cart[i].quantity += 1;
+                }
+             }
              updateLocalCart(state);
          }
      },

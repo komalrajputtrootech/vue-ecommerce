@@ -17,6 +17,11 @@
                     {{slotProps.data.price}}
                 </template>
             </Column>
+            <Column field="quantity" header="Quantity">
+                <template #body="slotProps">
+                    {{slotProps.data.quantity}}
+                </template>
+            </Column>
             <Column>
                 <Button icon="pi pi-check" />
             </Column>
