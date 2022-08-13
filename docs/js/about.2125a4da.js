@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkecommerce_app"]=self["webpackChunkecommerce_app"]||[]).push([[443],{2599:function(e,n,c){c.r(n),c.d(n,{default:function(){return p}});var r=c(6252);const a={class:"about"},u=(0,r._)("h1",null,"This is an ecommerce site developed in Vue 3 and django",-1),s=[u];function t(e,n){return(0,r.wg)(),(0,r.iD)("div",a,s)}var o=c(3744);const i={},d=(0,o.Z)(i,[["render",t]]);var p=d}}]);
+//# sourceMappingURL=about.2125a4da.js.map

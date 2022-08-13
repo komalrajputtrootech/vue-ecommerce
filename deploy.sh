@@ -6,9 +6,7 @@ npm run build
 
 cd dist
 
-git init 
-
-git add -A
-git commit -m "deployment"
-git push origin dev
+sudo git add -A
+sudo git commit -m "deployment"
+sudo git push origin dev
 cd -
