@@ -18,7 +18,6 @@ export default createStore({
      },
      addItemToCart(state, item){
          const exists = state.cart.filter(i => i.id === item.id);
-         console.log(exists)
          if(exists.length == 0){
              item.quantity = 1
              state.cart.push(item);
@@ -33,12 +32,17 @@ export default createStore({
              updateLocalCart(state);
          }
      },
-     removeItemFromCart(state, item){
-         const exists = state.cart.filter(i => i.id === item.id);
-         if(exists.length == 0){
-             state.cart.push(item);
-             updateLocalCart(state);
-         }
+     removeItemFromCart(state, item_id){
+         state.cart = state.cart.filter(i => i.id != item_id);
+         updateLocalCart(state);
+     },
+     updateQuantity(state, item_id){
+         for (var i=0; i<state.cart.length; i++) {
+            if (state.cart[i].id == item_id) {
+                state.cart[i].quantity -= 1;
+            }
+          }
+          updateLocalCart(state);
      }
   },
   actions: {

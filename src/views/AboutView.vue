@@ -1,6 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    {{ this.$store.state.cart }}
+    <h1>This is an ecommerce site developed in Vue 3 and django</h1>
   </div>
 </template>

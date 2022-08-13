@@ -1,4 +1,5 @@
 <template>
+        <Toast/>
 	<div style="margin-top: 20px;">
         <DataTable :value="cart" responsiveLayout="scroll">
             <template #header>
@@ -14,20 +15,28 @@
             </Column>
             <Column field="price" header="Price">
                 <template #body="slotProps">
-                    {{slotProps.data.price}}
+                    &#x20B9;{{slotProps.data.price}}
                 </template>
             </Column>
             <Column field="quantity" header="Quantity">
                 <template #body="slotProps">
-                    {{slotProps.data.quantity}}
+                     <InputNumber v-model="slotProps.data.quantity" :min="1" :allowEmpty="false"  showButtons @input="updateQuantity()"/>
                 </template>
             </Column>
-            <Column>
-                <Button icon="pi pi-check" />
+            <Column header="Total">
+                <template #body="slotProps">
+                     &#x20B9;{{ subTotal(slotProps.data) }}
+                </template>
+            </Column>
+            <Column header="Actions">
+                <template #body="slotProps">
+                     <Button label="Remove" @click=removeItemFromCart(slotProps.data.id) class="p-button-secondary" />
+                </template>
             </Column>
             <template #footer>
-                In total there are {{cart ? cart.length : 0 }} items in cart.
+                Total : &#x20B9;{{ total }} <br>
             </template>
+            <template #empty>No items in the cart.</template>
         </DataTable>
 	</div>
 </template>
@@ -38,7 +47,8 @@
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Button from 'primevue/button';
-
+import InputNumber from 'primevue/inputnumber';
+import Toast from 'primevue/toast';
 
 export default{
     name: 'CartList',
@@ -50,11 +60,32 @@ export default{
     components: {
         DataTable,
         Column,
-        Button
+        Button,
+        InputNumber,
+        Toast
     },
     mounted(){
         this.cart = this.$store.state.cart
+    },
+    computed: {
+        subTotal(){
+            return item => item.quantity * item.price
+        },
+        total() {
+            return this.cart.reduce((acc, item) => acc + (item.quantity * item.price), 0);
+        }
+    },
+    methods: {
+        removeItemFromCart(product_id){
+            this.$store.commit("removeItemFromCart", product_id);
+            this.$toast.add({severity:"success", detail:"Item removed from cart", life: 3000});
+            this.cart = this.$store.state.cart
+            //this.$router.go(this.$router.currentRoute);
+        },
+        updateQuantity(product_id){
+            this.$store.commit("updateQuantity", product_id);
+            this.cart = this.$store.state.cart
+        }
     }
 }
-
 </script>

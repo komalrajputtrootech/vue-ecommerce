@@ -4,6 +4,7 @@
 
 <script>
 import Menubar from 'primevue/menubar';
+import {PrimeIcons} from 'primevue/api';
 
     export default{
         name: "HeaderMenu",
@@ -12,7 +13,7 @@ import Menubar from 'primevue/menubar';
                 items: [
                     {label: 'Home', to: '/'},               
                     {label: 'About', to: 'about'},
-                    {label: 'Cart', to: '/cart'},               
+                    {label: 'Cart', icon: PrimeIcons.SHOPPING_BAG, to: '/cart'},               
                 ]   
             }
         },
